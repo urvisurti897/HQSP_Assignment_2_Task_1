@@ -147,5 +147,31 @@ namespace HQSP_Assignment_2_Task_1
                 Console.WriteLine("---------------------------------------------------------------------------");
             }
         }
+
+        static string GetValidatedInput(string prompt, string pattern, string errorMessage)
+        {
+            string input;
+            do
+            {
+                Console.Write(prompt);
+                input = Console.ReadLine().Trim();
+                if (Regex.IsMatch(input, pattern))
+                    return input;
+                Console.WriteLine($"{errorMessage}");
+            } while (true);
+        }
+
+        static int GetValidatedIntInput(string prompt, int min, int max)
+        {
+            int value;
+            do
+            {
+                Console.Write(prompt);
+                if (int.TryParse(Console.ReadLine(), out value) && value >= min && value <= max)
+                    return value;
+                Console.WriteLine($"Invalid Input. Value should range from {min} and {max}.");
+            }
+            while (true);
+        }
     }
 }
