@@ -107,7 +107,45 @@ namespace HQSP_Assignment_2_Task_1
     {
         static void Main(string[] args)
         {
-            //Console.WriteLine("Hello, World!");
+            List<Customer> customers = new List<Customer>();
+            string input;
+
+            do
+            {
+                Customer customer = new Customer();
+                customer.Name = GetValidatedInput("Enter customer name: ",
+                    @"^[A-Za-z]+$", "Invalid Input. Name should contain only letters.");
+
+                customer.BuildingType = GetValidatedInput("Enter building type (house or barn or garage) : ",
+                    @"^(house|barn|garage)$", "Invalid Input. Building type should be either 'house' or 'barn' or 'garage'.");
+
+                customer.Size = GetValidatedIntInput("Enter size (1000 sq.ft. to 50000 sq. ft.) : ", 1000, 50000);
+
+                customer.LightBulbs = GetValidatedIntInput("Enter number of light bulbs (1 to 20) : ", 1, 20);
+
+                customer.Outlets = GetValidatedIntInput("Enter number of outlets (1 to 50) : ", 1, 50);
+
+                customer.CreditCard = GetValidatedInput("Enter 16 digits credit card number : ",
+                    @"^\d{16}$", "Invalid Input. Credit card should be exact 16 digits.");
+
+                customers.Add(customer);
+
+                Console.Write("\nWould you like to add another customer? (yes/no): ");
+                input = Console.ReadLine().ToLower();
+            }
+            while (input == "yes");
+
+            Console.WriteLine("\nCustomer Information:");
+            Console.WriteLine("************************\n");
+
+            foreach (var customer in customers)
+            {
+                customer.CreateWiringSchema();
+                customer.PurchaseParts();
+                customer.SpecificTask();
+                customer.DisplayInfo();
+                Console.WriteLine("---------------------------------------------------------------------------");
+            }
         }
     }
 }
