@@ -1,4 +1,6 @@
-﻿namespace HQSP_Assignment_2_Task_1
+﻿using System.Text.RegularExpressions;
+
+namespace HQSP_Assignment_2_Task_1
 {
     class Customer
     {
@@ -71,6 +73,12 @@
                 Validate(value, @"^\d{16}$", "Credit card should have exact 16 digits.");
                 creditCard = value;
             }
+        }
+
+        private void Validate(string value, string pattern, string errorMessage)
+        {
+            if (!Regex.IsMatch(value, pattern))
+                throw new ArgumentException(errorMessage);
         }
     }
 
