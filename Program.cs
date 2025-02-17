@@ -80,6 +80,27 @@ namespace HQSP_Assignment_2_Task_1
             if (!Regex.IsMatch(value, pattern))
                 throw new ArgumentException(errorMessage);
         }
+
+        public void CreateWiringSchema() => Console.WriteLine($"{Name}: Creating wiring schema for {BuildingType}.");
+        public void PurchaseParts() => Console.WriteLine($"{Name}: Purchasing necessary parts for {BuildingType}.");
+        public void SpecificTask()
+        {
+            string task = BuildingType.ToLower() switch
+            {
+                "house" => "Installing fire alarms.",
+                "barn" => "Wiring milking equipment.",
+                "garage" => "Installing automatic doors.",
+                _ => "No specific tasks for this building type."
+            };
+
+            Console.WriteLine($"{Name}: {task}");
+        }
+
+        public void DisplayInfo()
+        {
+            string maskedCreditCard = CreditCard.Substring(0, 4) + " XXXX XXXX " + CreditCard.Substring(12, 4);
+            Console.WriteLine($"{Name} | {BuildingType} | {Size} sq. ft. | {LightBulbs} bulbs | {Outlets} outlets | {maskedCreditCard}");
+        }
     }
 
     internal class Program
